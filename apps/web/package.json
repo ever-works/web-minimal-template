@@ -1,0 +1,38 @@
+{
+  "name": "@ever-works/web-minimal",
+  "version": "0.1.0",
+  "description": "Ever Works general-purpose minimal website template — marketing, landing & content pages (Astro).",
+  "license": "AGPL-3.0",
+  "homepage": "https://ever.works",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ever-works/web-minimal-template.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ever-works/web-minimal-template/issues"
+  },
+  "author": {
+    "name": "Ever Co. LTD",
+    "email": "ever@ever.co",
+    "url": "https://ever.co"
+  },
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "typecheck": "astro check",
+    "clean": "rm -rf dist .astro node_modules"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.2",
+    "@tailwindcss/vite": "^4.2.4",
+    "astro": "^6.1.9",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "typescript": "^5.7.3"
+  }
+}

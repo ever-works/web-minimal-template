@@ -1,0 +1,25 @@
+---
+import { siteConfig } from '../config/site';
+const { finalCta } = siteConfig;
+---
+
+<section class="py-24 sm:py-28">
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div
+      class="relative overflow-hidden rounded-3xl border border-border bg-primary px-6 py-16 text-center text-primary-foreground sm:px-16"
+    >
+      <h2 class="mx-auto max-w-2xl text-balance text-3xl font-bold tracking-tight sm:text-4xl">
+        {finalCta.title}
+      </h2>
+      <p class="mx-auto mt-4 max-w-xl text-pretty opacity-90">{finalCta.subtitle}</p>
+      <div class="mt-8 flex justify-center">
+        <a
+          href={finalCta.primary.href}
+          class="inline-flex h-12 items-center justify-center rounded-lg bg-background px-7 text-base font-medium text-foreground transition-colors hover:opacity-90"
+        >
+          {finalCta.primary.label}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

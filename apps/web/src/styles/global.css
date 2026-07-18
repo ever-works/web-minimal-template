@@ -1,0 +1,121 @@
+@import 'tailwindcss';
+
+/* Make the `dark:` variant follow a `.dark` class on <html> (set by the theme
+ * toggle + the inline no-flash script) instead of only prefers-color-scheme. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+ * Design tokens. Tailwind v4 reads `@theme` and generates utilities
+ * (bg-background, text-primary, …). Edit these to rebrand the whole site.
+ * ------------------------------------------------------------------------- */
+@theme {
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0b;
+  --color-muted: #f4f4f5;
+  --color-muted-foreground: #6b7280;
+  --color-border: #e4e4e7;
+  --color-card: #ffffff;
+  --color-primary: #4f46e5;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #ec4899;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-background: #0a0a0b;
+    --color-foreground: #fafafa;
+    --color-muted: #18181b;
+    --color-muted-foreground: #a1a1aa;
+    --color-border: #27272a;
+    --color-card: #111113;
+    --color-primary: #818cf8;
+    --color-primary-foreground: #0a0a0b;
+    --color-accent: #f472b6;
+  }
+}
+
+:root.dark {
+  --color-background: #0a0a0b;
+  --color-foreground: #fafafa;
+  --color-muted: #18181b;
+  --color-muted-foreground: #a1a1aa;
+  --color-border: #27272a;
+  --color-card: #111113;
+  --color-primary: #818cf8;
+  --color-primary-foreground: #0a0a0b;
+  --color-accent: #f472b6;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Markdown blog article styling. */
+.prose :where(h1, h2, h3) {
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose h1 {
+  font-size: 1.875rem;
+}
+.prose h2 {
+  font-size: 1.5rem;
+}
+.prose h3 {
+  font-size: 1.25rem;
+}
+.prose p,
+.prose ul,
+.prose ol {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+.prose ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.prose ol {
+  list-style: decimal;
+  padding-left: 1.25rem;
+}
+.prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+.prose code {
+  background: var(--color-muted);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.35rem;
+  font-size: 0.875em;
+}
+.prose pre {
+  background: var(--color-muted);
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+.prose blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 1rem;
+  color: var(--color-muted-foreground);
+  font-style: italic;
+  margin-bottom: 1rem;
+}

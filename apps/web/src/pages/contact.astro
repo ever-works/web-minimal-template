@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout title="Contact" description={`Get in touch with the ${siteConfig.name} team.`}>
+  <section class="py-24 sm:py-28">
+    <div class="mx-auto w-full max-w-xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Let’s talk</h1>
+        <p class="mt-4 text-muted-foreground">
+          Questions, ideas, or ready to get started? Send us a message and we’ll get right back to
+          you.
+        </p>
+      </div>
+
+      <form
+        id="contact-form"
+        class="mt-12 space-y-4 rounded-2xl border border-border bg-card p-8"
+      >
+        <div class="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label for="name" class="mb-1.5 block text-sm font-medium">Name</label>
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              class="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            />
+          </div>
+          <div>
+            <label for="email" class="mb-1.5 block text-sm font-medium">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            />
+          </div>
+        </div>
+        <div>
+          <label for="message" class="mb-1.5 block text-sm font-medium">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            class="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          class="inline-flex h-11 w-full items-center justify-center rounded-lg bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
+        >
+          Send message
+        </button>
+      </form>
+
+      <div id="contact-success" class="mt-12 hidden rounded-2xl border border-border bg-card p-8 text-center">
+        <h3 class="text-lg font-semibold">Thanks — we’ll be in touch!</h3>
+        <p class="mt-2 text-sm text-muted-foreground">
+          Your message has been received. We usually reply within one business day.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    // Front-end-only demo submit. Wire this to your own endpoint or a form
+    // service (Formspree, Resend, an Ever Works action) to actually deliver mail.
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('contact-success');
+    if (form && success) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        form.classList.add('hidden');
+        success.classList.remove('hidden');
+      });
+    }
+  </script>
+</BaseLayout>

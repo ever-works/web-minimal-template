@@ -1,0 +1,92 @@
+---
+import { siteConfig } from '../config/site';
+import Icon from './Icon.astro';
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
+  <div class="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <a href="/" class="flex items-center gap-2 font-semibold">
+      <span class="grid h-8 w-8 place-items-center rounded-lg bg-primary text-primary-foreground">
+        {siteConfig.name.charAt(0)}
+      </span>
+      <span class="text-lg">{siteConfig.name}</span>
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex">
+      {
+        siteConfig.nav.map((item) => (
+          <a href={item.href} class="text-sm text-muted-foreground transition-colors hover:text-foreground">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="hidden items-center gap-2 md:flex">
+      <button
+        type="button"
+        data-theme-toggle
+        aria-label="Toggle theme"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+      >
+        <Icon name="moon" class="h-5 w-5 dark:hidden" />
+        <Icon name="sun" class="hidden h-5 w-5 dark:block" />
+      </button>
+      <a
+        href={siteConfig.cta.href}
+        class="inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground transition-colors hover:opacity-90"
+      >
+        {siteConfig.cta.label}
+      </a>
+    </div>
+
+    <button
+      type="button"
+      data-menu-toggle
+      aria-label="Toggle menu"
+      class="inline-flex h-9 w-9 items-center justify-center rounded-lg text-foreground hover:bg-muted md:hidden"
+    >
+      <Icon name="menu" class="h-5 w-5" />
+    </button>
+  </div>
+
+  <div data-mobile-menu class="hidden border-t border-border md:hidden">
+    <div class="mx-auto flex w-full max-w-6xl flex-col gap-1 px-4 py-4 sm:px-6">
+      {
+        siteConfig.nav.map((item) => (
+          <a
+            href={item.href}
+            class="rounded-lg px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href={siteConfig.cta.href}
+        class="mt-2 inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground"
+      >
+        {siteConfig.cta.label}
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const root = document.documentElement;
+      const dark = !root.classList.contains('dark');
+      root.classList.toggle('dark', dark);
+      root.classList.toggle('light', !dark);
+      try {
+        localStorage.setItem('theme', dark ? 'dark' : 'light');
+      } catch (e) {}
+    });
+  });
+  const menuBtn = document.querySelector('[data-menu-toggle]');
+  const menu = document.querySelector('[data-mobile-menu]');
+  if (menuBtn && menu) {
+    menuBtn.addEventListener('click', () => menu.classList.toggle('hidden'));
+  }
+</script>

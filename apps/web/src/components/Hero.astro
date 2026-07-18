@@ -1,0 +1,48 @@
+---
+import { siteConfig } from '../config/site';
+import Icon from './Icon.astro';
+const { hero } = siteConfig;
+---
+
+<section class="relative overflow-hidden">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 opacity-60 [background:radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-primary)_18%,transparent),transparent)]"
+  >
+  </div>
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col items-center px-4 py-24 text-center sm:px-6 sm:py-32 lg:px-8"
+  >
+    {
+      hero.badge && (
+        <span class="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
+          <span class="h-1.5 w-1.5 rounded-full bg-primary" />
+          {hero.badge}
+        </span>
+      )
+    }
+    <h1 class="max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-6xl">
+      {hero.title} <span class="text-primary">{hero.highlight}</span>
+    </h1>
+    <p class="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">{hero.subtitle}</p>
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <a
+        href={hero.primary.href}
+        class="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-7 text-base font-medium text-primary-foreground transition-colors hover:opacity-90"
+      >
+        {hero.primary.label}
+        <Icon name="arrow-right" class="h-4 w-4" />
+      </a>
+      {
+        hero.secondary && (
+          <a
+            href={hero.secondary.href}
+            class="inline-flex h-12 items-center justify-center rounded-lg border border-border bg-muted px-7 text-base font-medium text-foreground transition-colors hover:bg-border"
+          >
+            {hero.secondary.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+</section>

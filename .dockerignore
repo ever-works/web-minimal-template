@@ -1,0 +1,8 @@
+**/node_modules
+**/dist
+**/.astro
+**/.turbo
+**/.git
+**/.env
+**/.env.*.local
+**/npm-debug.log*

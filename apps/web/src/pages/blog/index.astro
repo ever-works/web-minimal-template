@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { siteConfig } from '../../config/site';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Blog"
+  description={`News, updates, and stories from the ${siteConfig.name} team.`}
+>
+  <section class="py-24 sm:py-28">
+    <div class="mx-auto w-full max-w-3xl px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold tracking-tight sm:text-5xl">Blog</h1>
+      <p class="mt-4 text-muted-foreground">
+        News, product updates, and stories from the {siteConfig.name} team.
+      </p>
+
+      {
+        posts.length === 0 ? (
+          <p class="mt-12 text-muted-foreground">No posts yet — check back soon.</p>
+        ) : (
+          <div class="mt-12 space-y-4">
+            {posts.map((post) => (
+              <a
+                href={`/blog/${post.id}`}
+                class="group block rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-md"
+              >
+                <div class="text-sm text-muted-foreground">
+                  {fmt(post.data.date)}
+                  {post.data.author && ` · ${post.data.author}`}
+                </div>
+                <h2 class="mt-2 text-xl font-semibold group-hover:text-primary">
+                  {post.data.title}
+                </h2>
+                <p class="mt-2 text-sm text-muted-foreground">{post.data.description}</p>
+                <span class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
+                  Read more <Icon name="arrow-right" class="h-4 w-4" />
+                </span>
+              </a>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>

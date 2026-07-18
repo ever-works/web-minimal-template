@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://acme.com/sitemap-index.xml

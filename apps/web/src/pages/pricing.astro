@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import { siteConfig } from '../config/site';
+---
+
+<BaseLayout title="Pricing" description={`Simple, transparent pricing for ${siteConfig.name}.`}>
+  <Pricing />
+  <Faq />
+</BaseLayout>
