@@ -3,7 +3,7 @@ import { siteConfig } from '../config/site';
 const { testimonials } = siteConfig;
 ---
 
-<section class="border-y border-border bg-muted/30 py-24 sm:py-28">
+<section data-component="testimonials" class="border-y border-border bg-muted/30 py-24 sm:py-28">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-semibold text-primary">{testimonials.eyebrow}</p>
@@ -13,7 +13,7 @@ const { testimonials } = siteConfig;
     <div class="mt-16 grid gap-6 md:grid-cols-3">
       {
         testimonials.items.map((t) => (
-          <figure class="flex flex-col rounded-2xl border border-border bg-card p-6">
+          <figure data-component="testimonial-card" class="flex flex-col rounded-2xl border border-border bg-card p-6">
             <blockquote class="flex-1 text-sm leading-relaxed">“{t.quote}”</blockquote>
             <figcaption class="mt-6">
               <div class="text-sm font-semibold">{t.author}</div>

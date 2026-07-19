@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 const { hero } = siteConfig;
 ---
 
-<section class="relative overflow-hidden">
+<section data-component="hero" class="relative overflow-hidden">
   <div
     aria-hidden="true"
     class="pointer-events-none absolute inset-0 -z-10 opacity-60 [background:radial-gradient(60%_50%_at_50%_0%,color-mix(in_oklab,var(--color-primary)_18%,transparent),transparent)]"
@@ -15,17 +15,17 @@ const { hero } = siteConfig;
   >
     {
       hero.badge && (
-        <span class="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
+        <span data-part="badge" class="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground">
           <span class="h-1.5 w-1.5 rounded-full bg-primary" />
           {hero.badge}
         </span>
       )
     }
-    <h1 class="max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-6xl">
+    <h1 data-part="title" class="max-w-4xl text-balance text-4xl font-bold tracking-tight sm:text-6xl">
       {hero.title} <span class="text-primary">{hero.highlight}</span>
     </h1>
-    <p class="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">{hero.subtitle}</p>
-    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+    <p data-part="subtitle" class="mt-6 max-w-2xl text-pretty text-lg text-muted-foreground">{hero.subtitle}</p>
+    <div data-part="actions" class="mt-10 flex flex-col gap-3 sm:flex-row">
       <a
         href={hero.primary.href}
         class="inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-primary px-7 text-base font-medium text-primary-foreground transition-colors hover:opacity-90"

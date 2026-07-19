@@ -3,7 +3,7 @@ import { siteConfig } from '../config/site';
 const { steps } = siteConfig;
 ---
 
-<section id="how-it-works" class="py-24 sm:py-28">
+<section id="how-it-works" data-component="how-it-works" class="py-24 sm:py-28">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-semibold text-primary">{steps.eyebrow}</p>
@@ -14,7 +14,7 @@ const { steps } = siteConfig;
     <div class="mt-16 grid gap-8 sm:grid-cols-3">
       {
         steps.items.map((step, i) => (
-          <div>
+          <div data-component="step">
             <div class="grid h-10 w-10 place-items-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
               {i + 1}
             </div>

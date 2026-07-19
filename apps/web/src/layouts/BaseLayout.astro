@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+// Plain-CSS override surface for AI customization — loaded after global.css so it wins.
+import '../styles/theme.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { siteConfig } from '../config/site';

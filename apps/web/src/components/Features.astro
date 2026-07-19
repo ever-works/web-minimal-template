@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 const { features } = siteConfig;
 ---
 
-<section id="features" class="py-24 sm:py-28">
+<section id="features" data-component="features" class="py-24 sm:py-28">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-2xl text-center">
       <p class="text-sm font-semibold text-primary">{features.eyebrow}</p>
@@ -15,12 +15,12 @@ const { features } = siteConfig;
     <div class="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {
         features.items.map((item) => (
-          <div class="rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-md">
-            <div class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
+          <div data-component="feature-card" class="rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-md">
+            <div data-part="icon" class="grid h-11 w-11 place-items-center rounded-xl bg-primary/10 text-primary">
               <Icon name={item.icon} class="h-6 w-6" />
             </div>
-            <h3 class="mt-5 text-lg font-semibold">{item.title}</h3>
-            <p class="mt-2 text-sm text-muted-foreground">{item.description}</p>
+            <h3 data-part="title" class="mt-5 text-lg font-semibold">{item.title}</h3>
+            <p data-part="description" class="mt-2 text-sm text-muted-foreground">{item.description}</p>
           </div>
         ))
       }
