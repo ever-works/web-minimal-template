@@ -5,7 +5,7 @@
 #
 #   - `deps`    → install the app's workspace dependencies.
 #   - `builder` → `pnpm --filter @ever-works/web-minimal run build` → apps/web/dist.
-#   - `runner`  → nginx serving apps/web/dist on :3000 (matches the k8s Service targetPort).
+#   - `runner`  → unprivileged nginx (uid 101) serving apps/web/dist on :3000 (matches the k8s Service targetPort).
 
 ARG NODE_VERSION=26.12.1-alpine
 ARG NGINX_VERSION=1.27-alpine
@@ -50,7 +50,13 @@ RUN pnpm --filter @ever-works/web-minimal run build
 
 # ---- runner ----------------------------------------------------------------
 
-FROM nginx:${NGINX_VERSION} AS runner
+# nginx-unprivileged (same nginx version, same alpine base) runs as the numeric
+# user 101 instead of root: the platform's k8s plugin can then enforce
+# runAsNonRoot with ALL capabilities dropped. Stock nginx starts its master as
+# root, which cannot write /var/cache/nginx or its pid file under a forced
+# non-root uid, nor setuid its workers with no capabilities. The pid file and
+# temp paths live under /tmp, and /etc/nginx is owned by 101 in this image.
+FROM nginxinc/nginx-unprivileged:${NGINX_VERSION} AS runner
 
 ARG GITHUB_REPOSITORY=""
 ARG GITHUB_SHA=""
@@ -85,6 +91,9 @@ server {
 EOF
 
 COPY --from=builder /work/apps/web/dist /usr/share/nginx/html
+
+# Numeric, so Kubernetes `runAsNonRoot` can verify it (a named user is refused).
+USER 101
 
 EXPOSE 3000
 CMD ["nginx", "-g", "daemon off;"]
